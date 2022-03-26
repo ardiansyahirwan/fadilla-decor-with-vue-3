@@ -11,7 +11,7 @@
         <v-img
           height="200px"
           rounded="xl"
-          src="@/assets/package-image/popular-1.png"
+          src="@/assets/images/package-image/popular-1.png"
         ></v-img>
       </v-col>
       <v-col cols="5" sm="12" md="12" class="pt-sm-0">
@@ -46,7 +46,7 @@ export default {
   computed: {
     isBackgroundClass() {
       return {
-        "bg-amber-lighten-3": this.card.popular && this.card.id % 2 == 0,
+        "bg-yellow-lighten-3": this.card.popular && this.card.id % 2 == 0,
         "bg-orange-lighten-4": this.card.popular && this.card.id % 2 == 1,
         "": this.card.popular == false,
       };

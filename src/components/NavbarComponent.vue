@@ -7,7 +7,9 @@
           @click.stop="showNavigation = !showNavigation"
         ></v-app-bar-nav-icon>
         <v-toolbar-title>
-          <span><v-img src="../assets/logo.svg" width="205"></v-img></span>
+          <span
+            ><v-img src="@/assets/images/logo.svg" width="205"></v-img
+          ></span>
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <router-link v-for="nav in navbar" :key="nav.id" :to="nav.link">

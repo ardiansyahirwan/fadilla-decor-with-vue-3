@@ -17,21 +17,21 @@
       ><v-img
         width="210"
         height="108.58"
-        src="../assets/partnership/partner-1.svg"
+        src="@/assets/images/partnership/partner-1.svg"
       ></v-img
     ></v-col>
     <v-col cols="6" sm="3" md="3" align-self="center"
       ><v-img
         width="210"
         height="108.58"
-        src="../assets/partnership/partner-2.svg"
+        src="@/assets/images/partnership/partner-2.svg"
       ></v-img
     ></v-col>
     <v-col cols="6" sm="3" md="3" align-self="center"
       ><v-img
         width="210"
         height="108.58"
-        src="../assets/partnership/partner-3.svg"
+        src="@/assets/images/partnership/partner-3.svg"
       ></v-img
     ></v-col>
   </v-row>

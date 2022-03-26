@@ -13,7 +13,7 @@
             sm="6"
             md="4"
             class="mb-md-15 py-md-7"
-            v-for="card in popular.populars"
+            v-for="card in filterPopular"
             :key="card.id"
           >
             <Card :card="card"></Card>
@@ -25,14 +25,25 @@
 
     <div class="schedule">
       <v-container>
-        <HeadingContent>
-          <template #heading>{{ schedule.heading }}</template>
-          <template #subtitle> {{ schedule.subtitleText }}</template>
-        </HeadingContent>
         <v-row>
-          <v-col></v-col>
+          <HeadingContent>
+            <template #heading>{{ schedule.heading }}</template>
+            <template #subtitle> {{ schedule.subtitleText }}</template>
+          </HeadingContent>
+          <v-col
+            cols="12"
+            sm="6"
+            md="6"
+            class="mb-md-15 py-md-7"
+            v-for="event in schedule.schedules.slice(0, 2)"
+            :key="event.id"
+          >
+            <ScheduleCard :event="event" />
+          </v-col>
         </v-row>
       </v-container>
+
+      <Footer />
     </div>
   </div>
 </template>
@@ -43,11 +54,13 @@ import { defineComponent } from "vue";
 // Components
 import Hero from "@/components/home/HeroComponent.vue";
 import Card from "@/components/CardComponent.vue";
-import HeadingContent from "@/components/HeadingTextComponent.vue";
-import Partnership from "@/components/PartnershipComponent.vue";
+import HeadingContent from "@/components/home/HeadingTextComponent.vue";
+import Partnership from "@/components/home/PartnershipComponent.vue";
+import ScheduleCard from "@/components/home/ScheduleCard.vue";
+import Footer from "@/components/FooterComponent.vue";
 export default defineComponent({
   name: "HomeView",
-  components: { Hero, Card, HeadingContent, Partnership },
+  components: { Hero, Card, HeadingContent, Partnership, ScheduleCard, Footer },
   data: () => ({
     hero: {
       heading: "Make your <br> Unforgetable moment",
@@ -72,15 +85,48 @@ export default defineComponent({
           price: "18 Jt",
           popular: true,
         },
-        { id: 1, name: "Akad Jasmine Package", price: "10 Jt", popular: true },
+        { id: 3, name: "Akad Jasmine Package", price: "10 Jt", popular: true },
+        {
+          id: 4,
+          name: "Akad Jasmine Package 2",
+          price: "10 Jt",
+          popular: false,
+        },
       ],
     },
     schedule: {
       heading: "Upcoming Event",
       subtitleText:
         "Look your  upcoming event here and see how they are be counted down",
+      schedules: [
+        {
+          id: 1,
+          name: "Aji & Yuuka",
+          dateEvent: "08 July 2022",
+          address: "Pabuaran Cibinong",
+        },
+        {
+          id: 2,
+          name: "Romi & Rossa",
+          dateEvent: "08 Jun 2022",
+          address: "Ciluar, Kab. Bogor",
+        },
+        {
+          id: 3,
+          name: "Andi & Umi",
+          dateEvent: "03 Mar 2022",
+          address: "Cilangkap, Depok",
+        },
+      ],
     },
   }),
+  computed: {
+    filterPopular() {
+      return this.popular.populars.filter((item) => {
+        return item.popular;
+      });
+    },
+  },
 });
 </script>
 

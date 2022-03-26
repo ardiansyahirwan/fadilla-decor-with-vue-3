@@ -3,7 +3,11 @@
     <v-container class="pt-md-14">
       <v-row>
         <v-col cols="12" md="6" class="hidden-sm-and-down">
-          <v-img src="@/assets/hero.svg" width="556" height="431.36"></v-img>
+          <v-img
+            src="@/assets/images/hero.svg"
+            width="556"
+            height="431.36"
+          ></v-img>
         </v-col>
         <v-col sm="12" md="6">
           <h1 class="text-md-h3 font-weight-black text-center text-sm-left">
