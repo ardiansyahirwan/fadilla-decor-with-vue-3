@@ -25,22 +25,27 @@
 
     <div class="schedule">
       <v-container>
-        <v-row>
+        <v-row class="mb-3">
           <HeadingContent>
             <template #heading>{{ schedule.heading }}</template>
             <template #subtitle> {{ schedule.subtitleText }}</template>
           </HeadingContent>
-          <v-col
-            cols="12"
-            sm="6"
-            md="6"
-            class="mb-md-15 py-md-7"
-            v-for="event in schedule.schedules.slice(0, 2)"
-            :key="event.id"
-          >
-            <ScheduleCard :event="event" />
-          </v-col>
         </v-row>
+        <v-carousel
+          hide-delimiter-background
+          cycle="true"
+          interval="4000"
+          delimiter-icon="mdi-minus"
+          touch
+        >
+          <v-carousel-item v-for="event in schedule.schedules" :key="event.id">
+            <v-row justify="center">
+              <v-col cols="6" align-self="center" class="mb-md-15 py-md-7">
+                <ScheduleCard :event="event" />
+              </v-col>
+            </v-row>
+          </v-carousel-item>
+        </v-carousel>
       </v-container>
 
       <Footer />
@@ -116,6 +121,18 @@ export default defineComponent({
           name: "Andi & Umi",
           dateEvent: "03 Mar 2022",
           address: "Cilangkap, Depok",
+        },
+        {
+          id: 4,
+          name: "Yakub & Siti",
+          dateEvent: "16 Apr 2022",
+          address: "KUD, Depok",
+        },
+        {
+          id: 5,
+          name: "Erwan & Ulfi",
+          dateEvent: "18 Sep 2022",
+          address: "Sentul, Kab. Bogor",
         },
       ],
     },
