@@ -34,13 +34,18 @@
         <v-carousel
           hide-delimiter-background
           cycle="true"
-          interval="4000"
+          interval="5000"
           delimiter-icon="mdi-minus"
           touch
         >
           <v-carousel-item v-for="event in schedule.schedules" :key="event.id">
             <v-row justify="center">
-              <v-col cols="6" align-self="center" class="mb-md-15 py-md-7">
+              <v-col
+                cols="12"
+                md="6"
+                align-self="center"
+                class="mb-md-15 py-md-7"
+              >
                 <ScheduleCard :event="event" />
               </v-col>
             </v-row>
@@ -148,7 +153,8 @@ export default defineComponent({
 </script>
 
 <style>
-.home p {
+.home p,
+.price p {
   color: #716e6b;
 }
 
