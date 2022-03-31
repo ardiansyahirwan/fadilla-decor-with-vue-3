@@ -42,7 +42,9 @@ export default {
   data: () => ({
     //
   }),
-  props: ["card"],
+  props: {
+    card: [],
+  },
   computed: {
     isBackgroundClass() {
       return {

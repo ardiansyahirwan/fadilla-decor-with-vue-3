@@ -56,7 +56,9 @@
 
 <script>
 export default {
-  props: ["event"],
+  props: {
+    event: [],
+  },
   computed: {
     isBackgroundClass() {
       return {

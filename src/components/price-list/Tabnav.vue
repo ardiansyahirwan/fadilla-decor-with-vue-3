@@ -41,7 +41,9 @@
 
 <script>
 export default {
-  props: ["tabNavigation"],
+  props: {
+    tabNavigation: [],
+  },
   methods: {
     backgroundForTabnav(id) {
       return {
