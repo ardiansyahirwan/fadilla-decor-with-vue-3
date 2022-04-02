@@ -1,19 +1,19 @@
 <template>
   <div class="home">
-    <Hero :hero="hero" :achievs="hero.achievments" />
+    <Hero :hero="heroSection" :achievs="achievmentsDataComponents" />
     <div class="popular">
       <v-container>
         <v-row justify-md="space-between">
           <HeadingContent>
-            <template #heading>{{ popular.heading }}</template>
-            <template #subtitle> {{ popular.subtitleText }}</template>
+            <template #heading>{{ popularSections.heading }}</template>
+            <template #subtitle> {{ popularSections.subtitleText }}</template>
           </HeadingContent>
           <v-col
             cols="12"
             sm="6"
             md="4"
             class="mb-md-15 py-md-7"
-            v-for="card in filterPopular"
+            v-for="card in popularPackages.slice(0, 3)"
             :key="card.id"
           >
             <Card :card="card"></Card>
@@ -27,8 +27,8 @@
       <v-container>
         <v-row class="mb-3">
           <HeadingContent>
-            <template #heading>{{ schedule.heading }}</template>
-            <template #subtitle> {{ schedule.subtitleText }}</template>
+            <template #heading>{{ scheduleSections.heading }}</template>
+            <template #subtitle> {{ scheduleSections.subtitleText }}</template>
           </HeadingContent>
         </v-row>
         <v-carousel
@@ -38,7 +38,7 @@
           delimiter-icon="mdi-minus"
           touch
         >
-          <v-carousel-item v-for="event in schedule.schedules" :key="event.id">
+          <v-carousel-item v-for="schedule in schedules" :key="schedule.id">
             <v-row justify="center">
               <v-col
                 cols="12"
@@ -46,7 +46,7 @@
                 align-self="center"
                 class="mb-md-15 py-md-7"
               >
-                <ScheduleCard :event="event" />
+                <ScheduleCard :event="schedule" />
               </v-col>
             </v-row>
           </v-carousel-item>
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 
 // Components
 import Hero from "@/components/home/HeroComponent.vue";
@@ -71,84 +71,63 @@ import Footer from "@/components/FooterComponent.vue";
 export default defineComponent({
   name: "HomeView",
   components: { Hero, Card, HeadingContent, Partnership, ScheduleCard, Footer },
-  data: () => ({
-    hero: {
+  setup() {
+    const heroSection = ref({
       heading: "Make your <br> Unforgetable moment",
       subtitleText:
         "We’ll be make your event unforgetable <br> with simple and luxury decoration",
-      // images: "@/assets/hero.svg",
-      achievments: [
-        { id: 1, name: "Design Decoration", quantity: 30 },
-        { id: 2, name: "Events Finished", quantity: 500 },
-        { id: 3, name: "Partnership", quantity: 3 },
-      ],
-    },
-    popular: {
+    });
+
+    const achievmentsDataComponents = ref([
+      { id: 1, name: "Design Decoration", quantity: 30 },
+      { id: 2, name: "Events Finished", quantity: 500 },
+      { id: 3, name: "Partnership", quantity: 3 },
+    ]);
+
+    const popularSections = ref({
       heading: "Popular Event Decoration",
       subtitleText:
         "We have more popular event decoration who can you order directly",
-      populars: [
-        { id: 1, name: "Garden Party Package", price: "26 Jt", popular: true },
-        {
-          id: 2,
-          name: "Intimate Wedding Package",
-          price: "18 Jt",
-          popular: true,
-        },
-        { id: 3, name: "Akad Jasmine Package", price: "10 Jt", popular: true },
-        {
-          id: 4,
-          name: "Akad Jasmine Package 2",
-          price: "10 Jt",
-          popular: false,
-        },
-      ],
-    },
+    });
+
+    const scheduleSections = ref({
+      heading: "Upcoming Event",
+      subtitleText:
+        "Look your  upcoming event here and see how they are be counted down",
+    });
+
+    const popularPackages = ref("");
+    const schedules = ref("");
+
+    onMounted(() => {
+      fetch("http://localhost:3000/eventPackages")
+        .then((res) => res.json())
+        .then((data) => (popularPackages.value = data))
+        .catch((err) => console.log(err.message));
+    });
+    onMounted(() => {
+      fetch("http://localhost:3000/schedules")
+        .then((res) => res.json())
+        .then((data) => (schedules.value = data))
+        .catch((err) => console.log(err.message));
+    });
+
+    return {
+      heroSection,
+      achievmentsDataComponents,
+      popularSections,
+      popularPackages,
+      schedules,
+      scheduleSections,
+    };
+  },
+  data: () => ({
     schedule: {
       heading: "Upcoming Event",
       subtitleText:
         "Look your  upcoming event here and see how they are be counted down",
-      schedules: [
-        {
-          id: 1,
-          name: "Aji & Yuuka",
-          dateEvent: "08 July 2022",
-          address: "Pabuaran Cibinong",
-        },
-        {
-          id: 2,
-          name: "Romi & Rossa",
-          dateEvent: "08 Jun 2022",
-          address: "Ciluar, Kab. Bogor",
-        },
-        {
-          id: 3,
-          name: "Andi & Umi",
-          dateEvent: "03 Mar 2022",
-          address: "Cilangkap, Depok",
-        },
-        {
-          id: 4,
-          name: "Yakub & Siti",
-          dateEvent: "16 Apr 2022",
-          address: "KUD, Depok",
-        },
-        {
-          id: 5,
-          name: "Erwan & Ulfi",
-          dateEvent: "18 Sep 2022",
-          address: "Sentul, Kab. Bogor",
-        },
-      ],
     },
   }),
-  computed: {
-    filterPopular() {
-      return this.popular.populars.filter((item) => {
-        return item.popular;
-      });
-    },
-  },
 });
 </script>
 

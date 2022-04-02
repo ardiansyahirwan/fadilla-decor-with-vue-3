@@ -48,9 +48,10 @@
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
 export default {
-  data: () => ({
-    footer: [
+  setup() {
+    const footer = ref([
       {
         id: 1,
         title: "Help",
@@ -86,8 +87,9 @@ export default {
           { id: 3, name: "Pabuaran, Cibinong Bogor - Indonesia" },
         ],
       },
-    ],
-  }),
+    ]);
+    return { footer };
+  },
 };
 </script>
 

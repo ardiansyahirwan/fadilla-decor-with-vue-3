@@ -18,10 +18,10 @@
         <v-card-title
           class="font-weight-medium text-subtitle-2 text-md-subtitle-1 px-1"
         >
-          {{ card.name }}
+          {{ card.packageName }}
         </v-card-title>
         <v-card-subtitle class="text-md-subtitle-1 px-1">
-          <p>Rp.{{ card.price }}</p>
+          <p>Rp.{{ card.price }} Jt</p>
         </v-card-subtitle>
         <v-btn
           v-if="card.popular"
@@ -38,21 +38,19 @@
 </template>
 
 <script>
+import { computed } from "@vue/runtime-core";
 export default {
-  data: () => ({
-    //
-  }),
   props: {
-    card: [],
+    card: Array,
   },
-  computed: {
-    isBackgroundClass() {
-      return {
-        "bg-yellow-lighten-3": this.card.popular && this.card.id % 2 == 0,
-        "bg-orange-lighten-4": this.card.popular && this.card.id % 2 == 1,
-        "": this.card.popular == false,
-      };
-    },
+  setup(props) {
+    const isBackgroundClass = computed(() => ({
+      "bg-yellow-lighten-3": props.card.popular && props.card.id % 2 == 0,
+      "bg-orange-lighten-4": props.card.popular && props.card.id % 2 == 1,
+      "": props.card.popular == false,
+    }));
+
+    return { isBackgroundClass };
   },
 };
 </script>

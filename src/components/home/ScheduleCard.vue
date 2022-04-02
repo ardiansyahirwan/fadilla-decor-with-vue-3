@@ -34,7 +34,7 @@
     <v-row>
       <v-col cols="6" sm="12" md="12">
         <v-card-title class="font-weight-medium text-subtitle-2 text-md-h5 px-1"
-          >{{ event.name }} Wedding</v-card-title
+          >{{ event.scheduleName }} Wedding</v-card-title
         >
         <v-card-subtitle class="text-md-subtitle-1 px-1">{{
           event.address
@@ -55,17 +55,17 @@
 </template>
 
 <script>
+import { computed } from "@vue/runtime-core";
 export default {
   props: {
-    event: [],
+    event: Array,
   },
-  computed: {
-    isBackgroundClass() {
-      return {
-        "bg-yellow-lighten-3": this.event.id % 2 == 0,
-        "bg-orange-lighten-4": this.event.id % 2 == 1,
-      };
-    },
+  setup(props) {
+    const isBackgroundClass = computed(() => ({
+      "bg-yellow-lighten-3": props.event.id % 2 == 0,
+      "bg-orange-lighten-4": props.event.id % 2 == 1,
+    }));
+    return { isBackgroundClass };
   },
 };
 </script>

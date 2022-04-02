@@ -1,7 +1,7 @@
 <template>
   <div class="price">
     <div class="tab-selection mt-md-10">
-      <Tabnav :tabNavigation="tabNav.itemsNav">
+      <Tabnav :tabNavigation="itemsNav">
         <template #tab-title>
           <span
             class="font-weight-bold text-md-h4"
@@ -12,6 +12,10 @@
       </Tabnav>
     </div>
 
+    <div class="card-container">
+      <v-container></v-container>
+    </div>
+
     <Footer />
   </div>
 </template>
@@ -19,24 +23,27 @@
 <script>
 import Tabnav from "@/components/price-list/Tabnav.vue";
 import Footer from "@/components/FooterComponent.vue";
+import { onMounted, ref } from "vue";
 export default {
   components: {
     Tabnav,
     Footer,
   },
-  data: () => ({
-    tabNav: {
+  setup() {
+    const tabNav = ref({
       title: "Our Price List",
       subtitleText: "Search your design decoration here",
-      itemsNav: [
-        { id: 1, name: "All Package" },
-        { id: 2, name: "Intimate Wedding" },
-        { id: 3, name: "Akad" },
-        { id: 4, name: "Garden Party" },
-        { id: 5, name: "Resepsi All-in" },
-      ],
-    },
-  }),
+    });
+
+    const itemsNav = ref("");
+
+    onMounted(() => {
+      fetch("http://localhost:3000/categories")
+        .then((res) => res.json())
+        .then((data) => (itemsNav.value = data));
+    });
+    return { tabNav, itemsNav };
+  },
 };
 </script>
 

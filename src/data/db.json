@@ -1,0 +1,26 @@
+{
+   "eventPackages":[
+      {"id":1, "packageName":"Garden Party Package", "price":26,"image":"garden-1.png", "popular": true},
+      {"id":2, "packageName":"Intimate Wedding Package", "price":18,"image":"intimate-1.png", "popular": true},
+      {"id":3, "packageName":"Akad Jasmine", "price":10, "image":"akad-1.png","popular": true},
+      {"id":4, "packageName":"All-in Wedding", "price":25,"image":"all-in-1.png", "popular": false},
+      {"id":5, "packageName":"Intimate 2 (Home set decor)", "price":18,"image":"intimate-2.png", "popular": false},
+      {"id":6, "packageName":"Garden Party Package 2", "price":26,"image":"garden-2.png", "popular": false},
+      {"id":7, "packageName":"Garden Party Package 3", "price":26,"image":"garden-3.png", "popular": false},
+      {"id":7, "packageName":"Intimate 3 (Home set Decor)", "price":18,"image":"intimate-3.png", "popular": false}
+   ],
+   "schedules":[
+      {"id":1, "scheduleName":"Aji & Yuuka", "dateEvent":"08 July 2022", "address":"Pabuaran, Cibinong"},
+      {"id":2, "scheduleName":"Romi & Rossa", "dateEvent":"08 July 2022", "address":"Pabuaran, Cibinong"},
+      {"id":3, "scheduleName":"Erwan & Ulfi", "dateEvent":"08 Jun 2022", "address":"Ciluar, Kab. Bogor"},
+      {"id":4, "scheduleName":"Andi & Umi", "dateEvent":"03 Mar 2022", "address":"Cilangkap, Depok"},
+      {"id":5, "scheduleName":"Yakub & Siti", "dateEvent":"08 July 2022", "address":"Kud, Kota Depok"}
+   ],
+   "categories":[
+      {"id":1, "categoryName":"All Package", "categoryPackage":"all"},
+      {"id":2, "categoryName":"Intimate Wedding", "categoryPackage":"intimate"},
+      {"id":3, "categoryName":"Akad", "categoryPackage":"akad"},
+      {"id":4, "categoryName":"Garden Party", "categoryPackage":"garden"},
+      {"id":5, "categoryName":"Resepsi All-in", "categoryPackage":"allIn"}
+   ]
+}

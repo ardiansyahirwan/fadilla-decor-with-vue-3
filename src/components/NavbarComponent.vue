@@ -57,16 +57,18 @@
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
 export default {
-  data() {
-    return {
-      navbar: [
-        { id: 1, items: "Home", link: "/" },
-        { id: 2, items: "Price List", link: "/price-list" },
-        { id: 3, items: "Event List", link: "/event-list" },
-      ],
-      showNavigation: false,
-    };
+  setup() {
+    const navbar = ref([
+      { id: 1, items: "Home", link: "/" },
+      { id: 2, items: "Price List", link: "/price-list" },
+      { id: 3, items: "Event List", link: "/event-list" },
+    ]);
+
+    const showNavigation = ref(true);
+
+    return { navbar, showNavigation };
   },
 };
 </script>
