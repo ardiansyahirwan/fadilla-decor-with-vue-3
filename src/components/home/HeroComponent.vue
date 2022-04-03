@@ -49,8 +49,8 @@
 <script>
 export default {
   props: {
-    hero: {},
-    achievs: [],
+    hero: Object,
+    achievs: Array,
   },
 };
 </script>

@@ -43,8 +43,9 @@
 export default {
   props: {
     tabNavigation: Array,
+    packages: Array,
   },
-  setup() {
+  setup(props) {
     const backgroundForTabnav = (id) => ({
       "bg-deep-orange-lighten-4": id == 1,
       "bg-orange-lighten-4": id == 2,

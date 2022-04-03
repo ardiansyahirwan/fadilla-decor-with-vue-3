@@ -13,7 +13,7 @@
             sm="6"
             md="4"
             class="mb-md-15 py-md-7"
-            v-for="card in popularPackages.slice(0, 3)"
+            v-for="card in filteredPackage"
             :key="card.id"
           >
             <Card :card="card"></Card>
@@ -33,10 +33,9 @@
         </v-row>
         <v-carousel
           hide-delimiter-background
-          cycle="true"
-          interval="5000"
           delimiter-icon="mdi-minus"
           touch
+          cycle="true"
         >
           <v-carousel-item v-for="schedule in schedules" :key="schedule.id">
             <v-row justify="center">
@@ -59,8 +58,6 @@
 </template>
 
 <script>
-import { computed, defineComponent, onMounted, ref } from "vue";
-
 // Components
 import Hero from "@/components/home/HeroComponent.vue";
 import Card from "@/components/CardComponent.vue";
@@ -68,7 +65,9 @@ import HeadingContent from "@/components/home/HeadingTextComponent.vue";
 import Partnership from "@/components/home/PartnershipComponent.vue";
 import ScheduleCard from "@/components/home/ScheduleCard.vue";
 import Footer from "@/components/FooterComponent.vue";
-export default defineComponent({
+import { ref } from "@vue/reactivity";
+import { computed, onMounted } from "@vue/runtime-core";
+export default {
   name: "HomeView",
   components: { Hero, Card, HeadingContent, Partnership, ScheduleCard, Footer },
   setup() {
@@ -96,8 +95,11 @@ export default defineComponent({
         "Look your  upcoming event here and see how they are be counted down",
     });
 
-    const popularPackages = ref("");
+    const popularPackages = ref([]);
     const schedules = ref("");
+    const filteredPackage = computed(() => {
+      return popularPackages.value.filter((element) => element.popular);
+    });
 
     onMounted(() => {
       fetch("http://localhost:3000/eventPackages")
@@ -116,19 +118,12 @@ export default defineComponent({
       heroSection,
       achievmentsDataComponents,
       popularSections,
-      popularPackages,
+      filteredPackage,
       schedules,
       scheduleSections,
     };
   },
-  data: () => ({
-    schedule: {
-      heading: "Upcoming Event",
-      subtitleText:
-        "Look your  upcoming event here and see how they are be counted down",
-    },
-  }),
-});
+};
 </script>
 
 <style>
