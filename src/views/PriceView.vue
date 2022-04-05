@@ -1,7 +1,7 @@
 <template>
   <div class="price">
     <div class="tab-selection mt-md-6">
-      <Tabnav :tabNavigation="itemsNav">
+      <TabList>
         <template #tab-title>
           <span
             class="font-weight-bold text-md-h4"
@@ -9,7 +9,7 @@
           ></span>
           <p class="text-md-subtitle-1" v-html="tabNav.subtitleText"></p
         ></template>
-      </Tabnav>
+      </TabList>
     </div>
 
     <div class="card-container mt-md-5">
@@ -38,12 +38,13 @@
 
 <script>
 import Card from "@/components/CardComponent.vue";
-import Tabnav from "@/components/price-list/Tabnav.vue";
+import TabList from "@/components/price-list/TabListNav.vue";
 import Footer from "@/components/FooterComponent.vue";
+
 import { computed, onMounted, ref } from "vue";
 export default {
   components: {
-    Tabnav,
+    TabList,
     Footer,
     Card,
   },
@@ -53,23 +54,14 @@ export default {
       subtitleText: "Search your design decoration here",
     });
 
-    const itemsNav = ref("");
     const eventPackages = ref([]);
 
     const hoverCard = (e) => {
       e.target.style.backgroundColor = "#E6EE9C";
-      // console.log(e.target);
     };
     const hoverDiscard = (e) => {
       e.target.style.backgroundColor = "#e4e0e0";
-      // console.log(e.target);
     };
-
-    onMounted(() => {
-      fetch("http://localhost:3000/categories")
-        .then((res) => res.json())
-        .then((data) => (itemsNav.value = data));
-    });
 
     onMounted(() => {
       fetch("http://localhost:3000/eventPackages")
@@ -77,7 +69,7 @@ export default {
         .then((data) => (eventPackages.value = data))
         .catch((err) => console.log(err.message));
     });
-    return { tabNav, itemsNav, eventPackages, hoverCard, hoverDiscard };
+    return { tabNav, eventPackages, hoverCard, hoverDiscard };
   },
 };
 </script>
