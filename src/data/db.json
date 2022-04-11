@@ -1,13 +1,13 @@
 {
    "eventPackages":[
-      {"id":1, "idCategory":4,  "packageName":"Garden Party Package", "price":26,"image":"garden-1.png", "popular": true},
-      {"id":2, "idCategory":2,"packageName":"Intimate Wedding Package", "price":18,"image":"intimate-1.png", "popular": true},
-      {"id":3,"idCategory":3, "packageName":"Akad Jasmine", "price":10, "image":"akad-1.png","popular": true},
-      {"id":4,"idCategory":5, "packageName":"All-in Wedding", "price":25,"image":"all-in-1.png", "popular": false},
-      {"id":5, "idCategory":2,"packageName":"Intimate 2 (Home set decor)", "price":18,"image":"intimate-2.png", "popular": false},
-      {"id":6, "idCategory":4,"packageName":"Garden Party Package 2", "price":26,"image":"garden-2.png", "popular": false},
-      {"id":7, "idCategory":4,"packageName":"Garden Party Package 3", "price":26,"image":"garden-3.png", "popular": false},
-      {"id":8, "idCategory":2,"packageName":"Intimate 3 (Home set Decor)", "price":18,"image":"intimate-3.png", "popular": false}
+      {"id":1, "keyword":["all","garden"],  "packageName":"Garden Party Package", "price":26,"image":"garden-1.png", "popular": true},
+      {"id":2, "keyword":["all","intimate"],"packageName":"Intimate Wedding Package", "price":18,"image":"intimate-1.png", "popular": true},
+      {"id":3,"keyword":["all","akad"], "packageName":"Akad Jasmine", "price":10, "image":"akad-1.png","popular": true},
+      {"id":4,"keyword":["all","allIn"], "packageName":"All-in Wedding", "price":25,"image":"all-in-1.png", "popular": false},
+      {"id":5, "keyword":["all","intimate"],"packageName":"Intimate 2 (Home set decor)", "price":18,"image":"intimate-2.png", "popular": false},
+      {"id":6, "keyword":["all","garden"],"packageName":"Garden Party Package 2", "price":26,"image":"garden-2.png", "popular": false},
+      {"id":7, "keyword":["all","garden"],"packageName":"Garden Party Package 3", "price":26,"image":"garden-3.png", "popular": false},
+      {"id":8, "keyword":["all","intimate"],"packageName":"Intimate 3 (Home set Decor)", "price":18,"image":"intimate-3.png", "popular": false}
    ],
    "schedules":[
       {"id":1, "scheduleName":"Aji & Yuuka", "dateEvent":"08 July 2022", "address":"Pabuaran, Cibinong"},

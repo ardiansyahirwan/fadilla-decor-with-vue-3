@@ -8,7 +8,11 @@
             <template #heading>{{ popularSections.heading }}</template>
             <template #subtitle> {{ popularSections.subtitleText }}</template>
           </HeadingContent>
+          <v-col class="text-center" v-if="error"
+            ><span class="font-weight-medium">{{ error }}</span></v-col
+          >
           <v-col
+            v-else
             cols="12"
             sm="6"
             md="4"
@@ -31,11 +35,14 @@
             <template #subtitle> {{ scheduleSections.subtitleText }}</template>
           </HeadingContent>
         </v-row>
+        <v-col class="text-center" v-if="scheduleError"
+          ><span class="font-weight-medium">{{ scheduleError }}</span></v-col
+        >
         <v-carousel
+          v-else
           hide-delimiter-background
           delimiter-icon="mdi-minus"
           touch
-          cycle="true"
         >
           <v-carousel-item v-for="schedule in schedules" :key="schedule.id">
             <v-row justify="center">
@@ -65,8 +72,9 @@ import HeadingContent from "@/components/home/HeadingTextComponent.vue";
 import Partnership from "@/components/home/PartnershipComponent.vue";
 import ScheduleCard from "@/components/home/ScheduleCard.vue";
 import Footer from "@/components/FooterComponent.vue";
-import { ref } from "@vue/reactivity";
-import { computed, onMounted } from "@vue/runtime-core";
+import getEventPackages from "@/composables/getEventPackages";
+import getSchedules from "@/composables/getSchedules";
+import { computed, onMounted, ref } from "@vue/runtime-core";
 export default {
   name: "HomeView",
   components: { Hero, Card, HeadingContent, Partnership, ScheduleCard, Footer },
@@ -95,24 +103,14 @@ export default {
         "Look your  upcoming event here and see how they are be counted down",
     });
 
-    const popularPackages = ref([]);
-    const schedules = ref("");
     const filteredPackage = computed(() => {
-      return popularPackages.value.filter((element) => element.popular);
+      return eventPackages.value.filter((element) => element.popular);
     });
 
-    onMounted(() => {
-      fetch("http://localhost:3000/eventPackages")
-        .then((res) => res.json())
-        .then((data) => (popularPackages.value = data))
-        .catch((err) => console.log(err.message));
-    });
-    onMounted(() => {
-      fetch("http://localhost:3000/schedules")
-        .then((res) => res.json())
-        .then((data) => (schedules.value = data))
-        .catch((err) => console.log(err.message));
-    });
+    const { error, load, eventPackages } = getEventPackages();
+    const { scheduleError, loadSchedule, schedules } = getSchedules();
+    load();
+    loadSchedule();
 
     return {
       heroSection,
@@ -121,6 +119,8 @@ export default {
       filteredPackage,
       schedules,
       scheduleSections,
+      error,
+      scheduleError,
     };
   },
 };

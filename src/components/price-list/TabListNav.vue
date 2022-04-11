@@ -14,7 +14,10 @@
         v-for="category in itemsNav"
         :key="category.id"
       >
-        <TabItem :category="category" />
+        <TabItem
+          :category="category"
+          @click="getCategoryId(category.categoryPackage)"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -29,7 +32,10 @@ export default {
   },
   setup() {
     const itemsNav = ref("");
-
+    const getCategoryId = (keywordCategories) => {
+      console.log(keywordCategories);
+      return keywordCategories;
+    };
     onMounted(() => {
       fetch("http://localhost:3000/categories")
         .then((res) => res.json())
@@ -38,6 +44,7 @@ export default {
 
     return {
       itemsNav,
+      getCategoryId,
     };
   },
 };
