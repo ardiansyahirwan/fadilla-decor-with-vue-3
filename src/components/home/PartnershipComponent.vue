@@ -14,25 +14,30 @@
       </v-text>
     </v-col>
     <v-col cols="6" sm="3" md="3" align-self="center"
-      ><v-img
+      v-for="partner in partnership" :key="partner.id">
+      <v-img
         width="210"
         height="108.58"
-        src="@/assets/images/partnership/partner-1.svg"
-      ></v-img
-    ></v-col>
-    <v-col cols="6" sm="3" md="3" align-self="center"
-      ><v-img
-        width="210"
-        height="108.58"
-        src="@/assets/images/partnership/partner-2.svg"
-      ></v-img
-    ></v-col>
-    <v-col cols="6" sm="3" md="3" align-self="center"
-      ><v-img
-        width="210"
-        height="108.58"
-        src="@/assets/images/partnership/partner-3.svg"
-      ></v-img
-    ></v-col>
+        :src="getImageUrl(partner.image)"
+      ></v-img>
+    </v-col>
   </v-row>
 </template>
+
+<script>
+import { ref } from '@vue/reactivity'
+export default {
+  setup() {
+    const partnership = ref([
+      {id:1, image:'partner-1.svg'},
+      {id:2, image:'partner-2.svg'},
+      {id:3, image:'partner-3.svg'},
+    ])
+
+    const getImageUrl = (pic)=> {
+      return require('@/assets/images/partnership/'+pic)
+    }
+    return {partnership, getImageUrl}
+  },
+}
+</script>

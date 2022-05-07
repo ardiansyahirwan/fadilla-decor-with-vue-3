@@ -9,9 +9,8 @@
     <v-row>
       <v-col cols="7" sm="12" md="12">
         <v-img
-          height="200px"
           rounded="xl"
-          src="@/assets/images/package-image/popular-1.png"
+          :src="getImgUrl(card.image)"
         ></v-img>
       </v-col>
       <v-col cols="5" sm="12" md="12" class="pt-sm-0" align-self="center">
@@ -51,7 +50,11 @@ export default {
       "bg-gray": props.white,
     }));
 
-    return { isBackgroundClass };
+    const getImgUrl = (pic)=> {
+      return require('../assets/images/package-image/'+pic)
+   }
+
+    return { isBackgroundClass, getImgUrl };
   },
 };
 </script>

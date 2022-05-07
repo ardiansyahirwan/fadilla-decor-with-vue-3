@@ -33,7 +33,7 @@ export default {
       "bg-lime-lighten-3": id == 4,
       "bg-green-accent-1": id == 5,
     });
-    return { backgroundForTabnav };
+    return { backgroundForTabnav, };
   },
 };
 </script>
