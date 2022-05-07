@@ -1,7 +1,7 @@
 <template>
   <div class="price">
     <div class="tab-selection mt-md-6">
-      <Tabnav :tabNavigation="itemsNav">
+      <TabList>
         <template #tab-title>
           <span
             class="font-weight-bold text-md-h4"
@@ -9,25 +9,31 @@
           ></span>
           <p class="text-md-subtitle-1" v-html="tabNav.subtitleText"></p
         ></template>
-      </Tabnav>
+      </TabList>
     </div>
 
-    <div class="card-container mt-md-5">
+    <div class="card-container mt-md-5 mt-4">
       <v-container>
         <v-row>
+          <v-col class="text-center" v-if="error"
+            ><span class="font-weight-medium">{{ error }}</span>
+          </v-col>
           <v-col
+            v-else
             cols="12"
             sm="4"
             md="4"
-            class="my-md-5"
-            v-for="itemPackage in eventPackages"
+            class="my-md-5 my-3"
+            v-for="itemPackage in filteredPackage"
             :key="itemPackage.id"
-            ><Card
+          >
+            <Card
               @mouseenter="hoverCard($event)"
               @mouseleave="hoverDiscard($event)"
               :card="itemPackage"
               :white="true"
-          /></v-col>
+            />
+          </v-col>
         </v-row>
       </v-container>
     </div>
@@ -38,12 +44,14 @@
 
 <script>
 import Card from "@/components/CardComponent.vue";
-import Tabnav from "@/components/price-list/Tabnav.vue";
+import TabList from "@/components/price-list/TabListNav.vue";
 import Footer from "@/components/FooterComponent.vue";
-import { computed, onMounted, ref } from "vue";
+
+import getEventPackages from "@/composables/getEventPackages";
+import { computed, ref } from "vue";
 export default {
   components: {
-    Tabnav,
+    TabList,
     Footer,
     Card,
   },
@@ -53,31 +61,29 @@ export default {
       subtitleText: "Search your design decoration here",
     });
 
-    const itemsNav = ref("");
-    const eventPackages = ref([]);
+    const filteredPackage = computed((keywords = "all") => {
+      return eventPackages.value.filter((element) => {
+        return element.keyword.includes(keywords);
+      });
+    });
 
     const hoverCard = (e) => {
       e.target.style.backgroundColor = "#E6EE9C";
-      // console.log(e.target);
     };
     const hoverDiscard = (e) => {
       e.target.style.backgroundColor = "#e4e0e0";
-      // console.log(e.target);
     };
 
-    onMounted(() => {
-      fetch("http://localhost:3000/categories")
-        .then((res) => res.json())
-        .then((data) => (itemsNav.value = data));
-    });
+    const { error, load, eventPackages } = getEventPackages();
+    load();
 
-    onMounted(() => {
-      fetch("http://localhost:3000/eventPackages")
-        .then((res) => res.json())
-        .then((data) => (eventPackages.value = data))
-        .catch((err) => console.log(err.message));
-    });
-    return { tabNav, itemsNav, eventPackages, hoverCard, hoverDiscard };
+    return {
+      tabNav,
+      filteredPackage,
+      hoverCard,
+      hoverDiscard,
+      error,
+    };
   },
 };
 </script>
