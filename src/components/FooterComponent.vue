@@ -58,7 +58,7 @@ export default {
         subtitle: [
           { id: 1, name: "Support" },
           { id: 2, name: "Knowledge Base" },
-          { id: 3, name: "Tutorials" },
+          { id: 3, name: "How to make a order" },
         ],
       },
       {

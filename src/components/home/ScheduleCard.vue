@@ -11,7 +11,7 @@
           max-height="246"
           max-width="332"
           rounded="xl"
-          src="@/assets/images/schedule/Upcoming-1.png"
+          :src="getImagesUrl(event.images)"
         />
       </v-col>
       <v-col cols="12" sm="4" md="4">
@@ -65,7 +65,11 @@ export default {
       "bg-yellow-lighten-3": props.event.id % 2 == 0,
       "bg-orange-lighten-4": props.event.id % 2 == 1,
     }));
-    return { isBackgroundClass };
+
+    const getImagesUrl = (image)=>{
+      return require('@/assets/images/package-image/'+image)
+    }
+    return { isBackgroundClass, getImagesUrl };
   },
 };
 </script>
